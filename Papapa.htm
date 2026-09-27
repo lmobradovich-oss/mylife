@@ -1,0 +1,755 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memories and Life Story</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --text-color: #333333;
+            --bg-color: #fdfdfd;
+            --accent-color: #7f8c8d;
+            --border-color: #eaeaea;
+        }
+        body {
+            font-family:  Arial, sans-serif;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 30px;
+        }
+        h1 {
+            font-size: 2.8em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            margin-top: 40px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+        h3 {
+            font-size: 1.3em;
+            color: #444;
+            margin-top: 30px;
+        }
+        p {
+            margin-bottom: 1.5em;
+            text-align: justify;
+        }
+        .intro-quote {
+            font-style: italic;
+            color: #555;
+            background: #f9f9f9;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+        }
+        /* Family Registry Styles */
+        .family-tree {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 20px 0;
+        }
+        .family-tree li {
+            padding: 8px 12px;
+            background: #f8f9fa;
+            margin-bottom: 6px;
+            border-radius: 4px;
+            border-left: 3px solid #bdc3c7;
+        }
+        .family-tree .highlight {
+            border-left-color: #e74c3c;
+            background: #fff5f5;
+        }
+        .sub-list {
+            list-style-type: circle;
+            padding-left: 30px;
+            margin-top: 5px;
+        }
+        .sub-list li {
+            background: none;
+            border: none;
+            padding: 4px 0;
+        }
+        /* Image Gallery Layouts */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .image-card {
+            background: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .image-placeholder {
+            width: 100%;
+            height: 150px;
+            background: #eaeded;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            border: 1px dashed #bdc3c7;
+        }
+        .caption {
+            font-size: 0.85em;
+            font-style: italic;
+            color: #666;
+        }
+    .auto-style1 {
+		text-align: center;
+		color: #00ADFF;
+		font-weight: normal;
+	}
+    .auto-style2 {
+		font-size: x-small;
+	}
+    .auto-style3 {
+		width: 100%;
+		height: 150px;
+		background: #eaeded;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #7f8c8d;
+		font-size: 0.9em;
+		margin-bottom: 10px;
+		border: 1px dashed #bdc3c7;
+		text-align: center;
+	}
+    	
+	.auto-style5 {
+		font-size: 0.85em;
+		font-style: italic;
+		color: #666;
+		text-align: center;
+	}
+	
+	.auto-style6 {
+		text-align: left;
+		font-family: Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal;
+	}
+	
+	.auto-style7 {
+		text-align: left;
+		margin-left: 240px;
+	}
+	
+	.auto-style8 {
+		text-align: center;
+		margin-left: 240px;
+	}
+	
+	.auto-style9 {
+		text-align: left;
+		margin-left: 440px;
+	}
+	th, td {
+    border: 1px solid #111111;
+    padding: 8px;
+    text-align: left;
+  }
+	
+	.auto-style10 {
+		font-size: small;
+		font-style: italic;
+		color: #666;
+	}
+	.auto-style11 {
+		font-size: small;
+		font-style: italic;
+		color: #666;
+		font-family:  "Arial, sans-serif";
+	}
+	
+	.auto-style13 {
+		font-size: 0.85em;
+		font-style: italic;
+		color: #666;
+		text-align: left;
+	}
+	/* 1. Grid layout for multiple images */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 150px;
+            object-fit: cover; /* Keeps images cropped cleanly in the grid */
+            cursor: pointer;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* 2. The Shared Modal Overlay */
+        .modal-overlay {
+            display: none; 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85); 
+            z-index: 1000; 
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 85%;
+            max-height: 85%;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 80vh; /* Limits image height to fit your screen */
+            display: block;
+            border-radius: 4px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            color: #fff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .close-btn:hover {
+            color: #ff4d4d; /* Subtle red hover for the close button */
+        }
+    .auto-style102 {
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: small;
+	}
+
+	.auto-style103 {
+		text-align: left;
+		font-family: Arial, sans-serif;
+		font-size: 14px;
+		font-style: normal;
+		font-variant-ligatures: normal;
+	}
+
+	.auto-style104 {
+		font-size: small;
+	}
+
+	</style>
+</head>
+<body style="height: 5891px">
+
+    <div class="auto-style6">
+
+    <div class="auto-style6">
+
+    <h1>
+    	
+                     
+						 
+						<img alt="Mainn"   src="Papapa_files/main.png"  >  
+                    
+                
+             
+
+       </h1>
+   
+    <section id="introduction">
+            <h2 class="auto-style1"><strong>Emotions on Sharing My Life Story</strong></h2>
+            <p>I feel very happy and grateful for this opportunity that will allow me to share my life with my close family.</p>
+            <p>I recognize that I'm not at writing, but I will try my best to summarize my life. I will describe some of my dreams/concerns without analyzing them, just observe them; If I do, I may lose some of the meaning.</p>
+            <p>I needed to consider that writing memories is a very long task, it includes vivid, nostalgic, precious, exhilarating, endearing, beautiful, wonderful, joyful, and unforgettable moments to name a few.</p>
+            <p>Destiny has provided to keep a close relation even though we spend time separated in Peru for months at times.</p>
+        </section>
+
+        <!-- Family History Section -->
+        <section id="family-history">
+            <h2>The Family So Far</h2>
+            
+            <ul class="family-tree">
+                <li><strong>Dad:</strong> Luis Felipe Obradovich Gonzales — Born in Callao, Peru (July 10, 1920)</li>
+                <li><strong>Mom:</strong> Rosa Alejandrina Rivera Zapata — Born in Lima, Peru (January 14, 1926)</li>
+                <li><strong>Self:</strong> Luis Manuel Obradovich Rivera — Born in Lima, Peru (March 8, 1949)</li>
+                <li><strong>Spouse:</strong> Elena (Leli) Gabriela Chavez Denen — Born in Lima, Peru (February 4, 1953)</li>
+                
+                <!-- Children and Grandchildren -->
+                <li><strong>Daughter:</strong> Micaela Gabriela Obradovich Chavez — Born in Sydney, Australia (August 13, 1989)
+                    <ul class="sub-list">
+                        <li class="highlight"><strong>Granddaughter:</strong> Sila Hedar Khlaf — Born in Jacksonville, Florida USA (July 18, 2019) <br><small><em>* She has a special place in my heart; a truly special relationship exists.</em></small></li>
+                        <li><strong>Grandson:</strong> Leo Hedar Khlaf — Born in Jacksonville, Florida USA (August 19, 2020)</li>
+                    </ul>
+                </li>
+                
+                <li><strong>Son:</strong> Martin Francisco Obradovich Chavez — Born in Sydney, Australia (March 13, 1992)</li>
+                
+                <!-- Siblings -->
+                <li><strong>Sister:</strong> Roxana Obradovich (Kamber) Rivera — Born in Lima, Peru (February 27, 1952)</li>
+                <li><strong>Brother:</strong> Roberto Obradovich Rivera — Born in Lima, Peru (December 24, 1953)</li>
+                <li><strong>Brother:</strong> Ricardo Obradovich Rivera — Born in Lima, Peru (August 13, 1958)</li>
+            </ul>
+
+            <div class="intro-quote">
+                "The bond between grandparents and grandchildren is a beautiful, reciprocal relationship that anchors the entire family. Grandparents serve as living libraries of wisdom and tradition, offering a steady harbor of emotional support. In return, grandchildren inject a burst of youthful energy and fresh perspectives into their lives, keeping them connected to the modern world through shared joy and laughter. I believe sharing emotions allows us to understand each other and foster deeper relationships."
+            </div>
+
+            <h3>Origins of Our Names</h3>
+            <p>That is a wonderful piece of family history! Surnames like <strong>Obradović</strong> carry so much depth, acting as a direct bridge to specific regions like Herzegovina, Zagreb, and Dubrovnik, even as families scatter across the globe today.</p>
+            <p>The surname <strong>Rivera</strong> is of Spanish and Italian origin, acting as a topographic name for someone who lived near a riverbank or shore, derived from the Spanish word <em>ribera</em> and Latin <em>ripa</em>. It originated in Spain—notably Galicia, Castilla, and treasures of Andalusia—and as a northern Italian variant.</p>
+        </section>
+
+        <!-- Gallery Section 1 -->
+        <section id="gallery-one">
+            <div class="image-grid">
+                <div class="image-card">
+                    <div class="image-placeholder">
+						<img alt="Mickey" height="144" src="Papapa_files/img8.jpg" width="231">
+						<img alt="Martin" height="144" src="Papapa_files/img9.jpg" width="236"> </div>
+                    <div class="caption">My beautiful daughter Micaela 12 months.&nbsp;&nbsp;&nbsp;&nbsp; My gorgeous son Martin 11 months.</div>
+                </div>
+              </div>  
+          </section>
+         <section id="gallery-2">
+           <div class="image-grid">
+                <div class="image-card">
+                     <div class="image-placeholder" style="width: 99%; height: 205px">
+                    
+           
+						<img alt="Sila" src="Papapa_files/imgB.jpg">&nbsp;
+						<img alt="Leo" src="Papapa_files/imgC.jpg">
+						<img alt="both" src="Papapa_files/imgD.jpg"></div>
+           <div class="caption">My beautiful grandchildren Sila and Leo.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; My treasure</div>
+            <div class="image-grid">   
+             	<div class="image-card">
+                  	<div class="image-placeholder" style="width: 100%; height: 193px">
+					<img alt="both S &amp; L" src="Papapa_files/imgE.jpg">&nbsp;
+					<img alt="fam" src="Papapa_files/imgF.jpg"></div>
+                   	<div class="caption">My treasure, Sila and Leo.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						Micaela, Hedar and kids 
+						</div>
+                	</div>
+
+		     </section>
+			<section id="gallery-3">
+
+           		 <div class="image-grid">
+                	<div class="image-card">
+                    	<div class="image-placeholder" style="width: 107%; height: 785px">
+							<img alt="abuelos" src="Papapa_files/img10.gif"></div>
+							<div class="caption">Grandparents in Kobe, Japan 1929</div>
+                    	           
+               		</div>
+           		 </div>    
+             </section>
+    			 <span class="auto-style2" style="line-height: 115%; font-family: &quot;Aptos&quot;,sans-serif; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Aptos; mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: &quot;Times New Roman&quot;; mso-bidi-theme-font: minor-bidi; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA"> 
+    		<section id="gallery-4">
+
+           		 <div class="image-grid">
+                	<div class="image-card">
+						<div class="image-placeholder" style="width: 100%; height: 315px">
+							&nbsp;
+							<img alt="gmr" src="Papapa_files/img2E.gif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<img alt="gm" src="Papapa_files/img30.jpg"><img alt="mj" src="Papapa_files/img31.jpg"></div>
+							 
+						<span class="auto-style2" style="line-height: 115%; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Aptos; mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: &quot;Times New Roman&quot;; mso-bidi-theme-font: minor-bidi; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA"> 
+							<div class="auto-style11">Grandparent Manuel and Rosa, mother side.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Grandparents Martin and Josefina, father side.</div>
+						
+						 
+		                    
+                	</div>
+            	
+		      </section>
+		         <span class="auto-style2" style="line-height: 115%; font-family: &quot;Aptos&quot;,sans-serif; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Aptos; mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: &quot;Times New Roman&quot;; mso-bidi-theme-font: minor-bidi; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA"> 
+		     <section id="gallery-5">
+
+           		 <div class="image-grid">
+                	<div class="image-card">
+						<div class="image-placeholder" style="width: 99%; height: 435px">
+							&nbsp;
+							<img alt="gmr" src="Papapa_files/img3B.jpg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<div class="auto-style10" > Hong Kong 1936 – The 3 
+								musketeers. Uncles Manuel Miguel and Carlos. Mom 
+								brothers.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+						
+						</div>
+		                    
+                	</div>
+            	</div>
+		     </section>
+     
+		     
+ 
+	<h2 class="auto-style1">First Glimpses: Painting a Picture of Life 
+			in My Early Years</h2>
+                   
+            
+						
+            
+		         
+            
+						
+             <p class="auto-style6" >My memory begins in earnest around the age of 
+			five, marked by a major family move in 1955. My father was appointed 
+			Commander in Chief of the Air Force base in San Ramón, taking us 
+			from Lima into the Peruvian Amazon.</p>
+					 
+		 
+    					<p class="auto-style6" >I was enrolled in a local kindergarten located at the 
+	end of our residential block. My mother established a sweet morning routine 
+	where our house maid would deliver fresh orange juice to me at school. Like 
+	most childhood recollections, my time there remains a blend of foundational 
+	social experiences, from the joys of playtime and snacks to the brief 
+	anxieties of morning drop-offs.</p>
+            <p class="auto-style6" >The base itself was a place of inspiration. 
+			Watching my father take off on civil missions sparked a lifelong 
+			dream in me to become a pilot. He was also a deeply athletic figure, 
+			and some of my favorite moments were spent watching him play tennis 
+			and basketball.</p>
+	<p class="auto-style6" >Two years later, our family transitioned back to Lima, 
+	where I entered primary school. I attended a historic Catholic school 
+	established by the Marist Brothers in 1817. This period brought significant 
+	personal milestones: I celebrated my First Communion on June 21, 1956, 
+	followed by my Confirmation, where my maternal uncle, Manuel, served as my 
+	Godfather.</p>
+                    <div class="auto-style3" style="width: 92%; height: 250px">
+						<img alt="mag" src="Papapa_files/img19.gif"><img alt="tar" src="Papapa_files/img1B.jpg"><br></div>
+				<p class="auto-style5" style="height: 9px">Mom and Grandma. I was 1 year old&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Tarzan.</p>
+					<div class="auto-style3" style="width: 91%; height: 203px">
+						<img alt="hav" src="Papapa_files/imgA.gif"></div>
+                    <div class="auto-style5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Having 
+						Fun&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>
+	<p class="caption" style="height: 12px">&nbsp;</p>
+
+					<div class="auto-style3" style="width: 94%; height: 304px">
+						<img alt="first" src="Papapa_files/imgD.gif">
+						<img alt="conf" src="Papapa_files/imgF1.jpg"></div>
+                    <div class="auto-style5">&nbsp; My first Communion - 1956&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						Confirmation Sacrament</div>
+
+            <p class="caption" style="height: 3px">&nbsp;</p>
+
+
+    
+            
+	
+
+		<div class="auto-style6"> 
+			<img alt="fut" src="Papapa_files/img5.gif">
+<img alt="f" height="238" src="Papapa_files/img15.gif" width="323"><![endif]><img alt="pc" src="Papapa_files/img17.jpg" height="235" width="139"><img alt="pc" src="Papapa_files/img18.jpg" height="235" width="139"><br></div>
+	
+<div class="auto-style5">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	First communion printed card</div> 
+
+	<p class="caption" style="height: 9px">&nbsp;</p>
+					
+					<div class="auto-style3" style="width: 93%; height: 424px">
+						<img alt="ma" src="Papapa_files/img22.jpg"></div>
+						 <p class="auto-style5" style="height: 18px">Grand 
+						 Josefina and Rosa. I was 12 years old.</p>
+						 
+			       <div class="auto-style3" style="width: 93%; height: 424px">
+						<img alt="fo" height="395" src="Papapa_files/img25.jpg" width="492"></div>
+						 <p class="auto-style5" style="height: 18px">Obradovich 
+						 Rivera&nbsp;</p>
+
+
+<h2 class="auto-style1">A Place Called Home</h2>
+					 
+		</span>
+                    
+		<p class="auto-style6" >Looking back, I don’t remember every single pastime 
+		from my childhood, but the games I played remain clear in my mind. 
+		During my primary school years, my absolute favorite game was marbles. 
+		Every single day after classes let out, a couple of friends and I would 
+		head straight to the park right across from the school. We would lose 
+		ourselves in the game for thirty or forty minutes before I made the 
+		quick, five-minute walk home. Lima was a completely different place back 
+		then—peaceful, incredibly safe, and we were fortunate to live in a very 
+		beautiful part of town.</p>
+		</span>
+                    
+<p class="auto-style6">The lower floor alone felt like a grand world to explore. It featured two separate living areas, including a very formal setup for my grandparents. Their space included a massive bedroom with its own cozy seating area, complete with a couple of chairs and a sofa. Attached was a large, modern bathroom where my grandmother would bathe me every night before bed. Those evening baths remain a tender, nostalgic memory for me—a beautiful reflection of her loving, secure, yet beautifully old-fashioned and strict care.
+</p>
+		<p class="auto-style6" >On the days we didn't play marbles, I stayed behind 
+		at school for about an hour to practice gymnastics on the parallel and 
+		single bars. It was grueling work that required immense physical 
+		strength. Sometimes, the friction would leave deep, painful sores on my 
+		hands that took days to heal, but the effort paid off. I firmly believe 
+		those afternoons on the bars built the strong muscles in my back and 
+		chest that stayed with me for life. </p>
+
+<p class="auto-style6">The heart of the home was the massive kitchen, which was divided into two distinct spaces. One side held our morning breakfast table, the refrigerator, and endless cabinets for dinnerware. The other side was a bustling hub dedicated entirely to cooking, cleaning, the pantry, and confectionery baking.
+</p>
+<p class="auto-style6">To get upstairs, my younger brother Roberto and I would climb a set of wide, grand stairs. Naturally, we turned them into a playground, spending hours sliding down the steps on a piece of carpet. The second floor housed my parents' bedroom, our bedrooms, and my father’s home office. Tucked away on this same level were the laundry facilities and the maids' quarters. If you kept climbing to the third level, you would find my dad’s extra storage room and quarters for the male house staff.
+
+</p> 
+
+<p class="auto-style6">Beyond our walls, Miraflores was a magical neighborhood to grow up in. It was a tight-knit community where everyone knew one another and got along beautifully. I quickly made friends with all the neighborhood kids my age. We spent our days playing soccer, climbing the local blackberry trees, and celebrating Carnival season Brazilian-style, which meant epic water fights that left us absolutely soaked.
+</p> 
+<p class="auto-style6">My father kept that beautiful house for about fifteen years. Eventually, as the nest emptied out, my parents downsized to an apartment. By then, I had moved to the United States, Roberto and my sister had married and started their own lives, and our youngest brother, Ricardo, was the only one left living with our parents.</span><span class="auto-style2" style="line-height: 115%; font-family: &quot;Aptos&quot;,sans-serif; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Aptos; mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: &quot;Times New Roman&quot;; mso-bidi-theme-font: minor-bidi; mso-ansi-language: EN-US; mso-fareast-language: EN-US; mso-bidi-language: AR-SA"> 
+		     </p>	
+
+<div class="auto-style3" style="width: 95%; height: 443px">
+						<img alt="bros" src="Papapa_files/imgA.jpg"></div>
+						 <p class="auto-style5" style="height: 18px">With my 
+						 brothers</p>
+
+
+<div class="auto-style3" style="width: 95%; height: 443px">
+						<img alt="hk" src="Papapa_files/imgC1.jpg"></div>
+						 <p class="auto-style5" style="height: 18px">Grand 
+						 Parents in Hong Kong 1926</p>
+
+
+
+<h2 class="auto-style1">Memories of My Parents</h2>
+ 
+ 
+<p class="auto-style6">The story of my parents begins with two deeply fascinating family lines. On my father’s side, my grandfather, Martin Obradović, was born along the Adriatic coast in 1891, back when it was part of the Kingdom of Dalmatia under the Austria-Hungary Empire. A brilliant mining engineer, Martin saw a world of business opportunities across the ocean and immigrated to Peru alongside his cousins to work in the booming mining sector.</p>
+<p class="auto-style6">It was there that his path crossed with my grandmother, Josefina Victoria Gonzales Mostacero. Her family were established ranchers who owned a sprawling, beautiful hacienda. When her father passed away, an arranged marriage was brought about between Martin and Josefina so they could combine his engineering and business sharp-mindedness with her family's land, managing the great hacienda together. They were blessed with three sons: Pepe (José), who grew up to be a successful merchant, and my father, Luis, along with his younger brother, Humberto, both of whom took to the skies as Air Force pilots.</p>
+<p class="auto-style6">My mother’s side of the family lived a highly international life. My maternal grandfather was a dedicated diplomat, serving as an ambassador to several Asian nations, including China, Hong Kong, Japan, and India. He and my grandmother raised five children—three boys and two girls. Tragically, their lives were upended when one of the little girls, Violeta, caught typhoid and died at just five years old. It was a heartbreaking loss that devastated my grandmother for the rest of her days.</p>
+<p class="auto-style6"> Out of these two different worlds came my parents. My father, Luis Felipe, was born in Callao on July 10, 1920. My mother, Rosa Alejandrina, was born in Lima on January 14, 1926. One evening, at a party, they locked eyes. It was absolute love at first sight. They were married on April 28, 1948, starting a beautiful union that lasted a lifetime. My father passed away at the grand age of 94 on August 16, 2014, and my mother followed him a decade later on June 24, 2024, at 98 years old.
+</p>
+
+
+<div class="auto-style3" style="width: 97%; height: 394px">
+						<img alt="3 bros" src="Papapa_files/img10.jpg">
+						<img alt="mad" src="Papapa_files/img11.jpg"></div>
+                    <div class="auto-style5">
+						<p align="center" class="auto-style7">From left to right 
+						Uncles Humberto, Pepe and Dad.<span style="mso-spacerun:yes">&nbsp; 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Mom and Dad.</p>
+	</div>
+
+            <p class="caption" style="height: 3px">&nbsp;</p>
+
+<div class="auto-style3" style="width: 97%; height: 394px">
+						<img alt="d1937" src="Papapa_files/img13.gif">
+						<img alt="dlut" src="Papapa_files/img19.jpg"><img alt="cap" src="Papapa_files/img20.jpg"></div>
+                    <div class="auto-style5">
+						<p align="center" class="auto-style7">Dad in 1937 – At 17 years old.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						Dad as lieutenant. <span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 
+						&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</span>Dad as Captain.<o:p></o:p></p>
+	</div>
+
+            <p class="caption" style="height: 3px">&nbsp;</p>
+            
+<div class="auto-style3" style="width: 97%; height: 394px">
+						<img alt="mom1" src="Papapa_files/img21.jpg">
+						<img alt="mom2" src="Papapa_files/img1A.gif"><img alt="m3" src="Papapa_files/img1E.jpg"></div>
+                    <div class="auto-style5">
+						<p align="left" class="auto-style8">Mom</p>
+	</div>
+
+            <p class="caption" style="height: 3px">&nbsp;</p>
+ <div class="auto-style3" style="width: 97%; height: 394px">
+						<img alt=" " src="Papapa_files/img23.jpg" height="378" width="229">
+						<img alt="w2" src="Papapa_files/img24.jpg" height="381" width="494"></div>
+                    <div class="auto-style5">
+						<p align="left" class="auto-style9">Weeding day</p>
+	</div>
+
+            <p class="caption" style="height: 3px">&nbsp;</p>
+  <div class="auto-style3" style="width: 99%; height: 450px">
+						<img alt="mcousings" height="452" src="Papapa_files/img26.jpg" width="621"> </div>
+                    <div class="auto-style5">
+						<p align="left" class="auto-style9">Mom and cousins.</p>
+	</div>
+
+           <br><br>
+			<img alt="og" height="129" src="Papapa_files/obragen.png" width="419"></p>
+            
+            
+
+	<table style="width: 100%">
+		<tr>
+			<td style="width: 529px">
+				<img alt="fg" height="377" src="Papapa_files/obradovic%200%20generation.jpg" width="469"></td>
+			<td>
+				<img alt="sg" height="864" src="Papapa_files/obradovic%202st%20generation.jpg" width="503"></td>
+		</tr>
+		<tr>
+			<td style="width: 529px">
+	<img alt="tg" height="684" src="Papapa_files/obradovic%203da%20generation.jpg" width="483"></td>
+			<td>
+	<img alt="fg" height="580" src="Papapa_files/obradovic%204cuarat%20generation.jpg" width="444"></td>
+		</tr>
+		<tr>
+			<td style="width: 529px">
+	<img alt="fg" height="428" src="Papapa_files/obradovic%204th%20generation.jpg" width="443"></td>
+			<td>
+			<img alt="sg" height="424" src="Papapa_files/obradovic%206th%20generation.jpg" width="444"></td>
+		</tr>
+	</table>
+	<br>
+	
+	 
+	<img alt="rg"   src="Papapa_files/riveragen.png"  ></td>
+		 
+	<br>
+	<br>
+	<table style="width: 100%">
+		<tr>
+			<td class="auto-style6">
+			<img alt="fg" height="336" src="Papapa_files/image088.jpg" width="741"></td>
+ 		</tr>
+ 		
+		 
+	</table>
+	
+	 <br>
+	
+	<p class="auto-style6">Click name to view family tree</p>
+
+    <!-- The Gallery Grid -->
+   <!-- <div class="auto-style101">-->
+
+        <!-- 
+          Notice the custom "data-large" attribute. 
+          This holds the link to the high-quality version of the image.
+        -->
+        
+        <div class="auto-style6">
+         <img src="Papapa_files/luchinyroxi.png" data-large="Papapa_files/Rivera-2.png" alt="Luching Roxi" class="auto-style1" onclick="openModal(this)" height="36" width="155">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <img src="Papapa_files/roberyrich.png" data-large="Papapa_files/rivera-4.png" alt="Luching Roxi" class="auto-style1" onclick="openModal(this)" height="36" width="155">
+ 
+    	</div>
+ 
+     
+
+    <!-- ONE Shared Modal Shell for all images -->
+    <div id="imageModal" class="modal-overlay" onclick="closeModalOutside(event)">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <img id="modalTargetImg" src="" alt="Expanded View" class="modal-image">
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalTargetImg');
+
+        // The 'element' argument passes the specific image that was clicked
+        function openModal(element) {
+            // 1. Get the large image URL stored inside the clicked element's data-large attribute
+            const largeImageUrl = element.getAttribute('data-large');
+            
+            // 2. Assign that URL to our single modal image element
+            modalImg.src = largeImageUrl;
+            
+            // 3. Show the modal
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            // Clear the source so the next time it opens, it doesn't briefly flash the old image
+            modalImg.src = ""; 
+        }
+
+        function closeModalOutside(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+	
+	
+	
+	<h2 class="auto-style1">The Magic of Play</h2>
+					  
+					 <p class="auto-style103"> 
+		 Looking back, I don’t remember every single pastime 
+		from my childhood, but the games I played remain clear in my mind. 
+		During my primary school years, my absolute favorite game was marbles. 
+		Every single day after classes let out, a couple of friends and I would 
+		head straight to the park right across from the school. We would lose 
+		ourselves in the game for thirty or forty minutes before I made the 
+		quick, five-minute walk home. Lima was a completely different place back 
+		then—peaceful, incredibly safe, and we were fortunate to live in a very 
+		beautiful part of town.</p>
+		<p class="auto-style103">On the days we didn't play marbles, I stayed behind 
+		at school for about an hour to practice gymnastics on the parallel and 
+		single bars. It was grueling work that required immense physical 
+		strength. Sometimes, the friction would leave deep, painful sores on my 
+		hands that took days to heal, but the effort paid off. I firmly believe 
+		those afternoons on the bars built the strong muscles in my back and 
+		chest that stayed with me for life. </p>
+		<p class="auto-style103">For a year or two, I also tried my hand at 
+		competitive swimming, training in freestyle at the school pool. However, 
+		after a lot of hard work, I realized my body just wasn’t built to be a 
+		champion swimmer. I could clock the 100-meter dash in 1:18 minutes, but 
+		the top-tier swimmers were finishing under 1:08.<o:p></o:p></p>
+		<p class="auto-style103">While I occasionally played hide-and-seek with my 
+		cousins, my true passion was soccer. Most of my free time at home was 
+		spent kicking a soccer ball around with my cousin Manolo, playing match 
+		after match in our own backyard. </p>
+<p class="auto-style102">&nbsp;
+
+<div class="auto-style3" style="width: 82%; height: 304px">
+						<img alt="pat" src="Papapa_files/Con%20Patricia%20Gonzales%20Vigil.png" height="288" width="201">
+						<img alt="fiesta" src="Papapa_files/Fiesta.png" height="285" width="496"></div>
+                    <div class="auto-style13">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; At a party with Peruvian swiming champ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+						Military school party</div>
+
+            <p class="caption" style="height: 3px">&nbsp;</p>
+            <br>       
+	
+	
+	
+	<p class="auto-style6">&nbsp;</p>
+	<p class="auto-style6">
+					 American, we believe in putting our extensive resource  
+	</p>
+	<p class="auto-style6">
+	&nbsp;</p>
+	<p class="auto-style6">
+	&nbsp;</p>
+	<p class="auto-style6">
+	&nbsp;</p>
+     <p class="auto-style6">
+	 &nbsp;</p>
+      
+            
+
+	</div>
+      
+            
+
+</body>
+
+</html>
